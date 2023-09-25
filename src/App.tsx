@@ -1,5 +1,6 @@
 import { Route, Routes, Link, useMatch } from "react-router-dom";
-import { AddIssue, Issues, Issue } from "./pages";
+import { AddIssue, Issues, IssueDetails } from "./pages";
+import { FetchingIndicator } from "./components";
 
 function App() {
   const isRootPath = useMatch({ path: "/", end: true });
@@ -21,10 +22,11 @@ function App() {
           element={<AddIssue />}
         />
         <Route
-          path="/issue/:number"
-          element={<Issue />}
+          path="/issue/:issueNumber"
+          element={<IssueDetails />}
         />
       </Routes>
+      <FetchingIndicator />
     </div>
   );
 }

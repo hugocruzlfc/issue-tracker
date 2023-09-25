@@ -1,4 +1,12 @@
+export { default as Comment } from "./Comment";
+export { default as FetchingIndicator } from "./FetchingIndicator";
 export { default as IssueDetails } from "./IssueDetails";
+export { default as IssueHeader } from "./IssueHeader";
+export { default as IssueIcon } from "./IssueIcon";
 export { default as IssueItem } from "./IssueItem";
 export { default as IssuesList } from "./IssuesList";
+export { default as Label } from "./Label";
 export { default as LabelList } from "./LabelList";
+export { default as Loader } from "./Loader";
+export { default as SearchForm } from "./SearchForm";
+export { default as StatusSelected } from "./StatusSelected";

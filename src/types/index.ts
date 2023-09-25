@@ -14,7 +14,7 @@ export interface Issue {
   id: string;
   number: number;
   title: string;
-  status: "backlog" | "todo" | "inProgress" | "done" | "cancelled";
+  status: Status;
   dueDate: Date | null;
   createdDate: Date;
   createdBy: string;
@@ -30,3 +30,5 @@ export interface IssueComment {
   createdDate: Date;
   createdBy: string;
 }
+
+export type Status = "backlog" | "todo" | "inProgress" | "done" | "cancelled";

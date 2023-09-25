@@ -53,7 +53,7 @@ export const defaultComments = [
   },
 ];
 
-export const possibleStatus = [
+export const statusOptions = [
   { id: "backlog", label: "Backlog" },
   { id: "todo", label: "Todo" },
   { id: "inProgress", label: "In Progress" },

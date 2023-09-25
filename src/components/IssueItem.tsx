@@ -1,8 +1,11 @@
 import React from "react";
 import { Issue } from "../types";
-import { GoIssueOpened, GoIssueClosed, GoComment } from "react-icons/go";
+import { GoComment } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { relativeDate } from "../helpers/relativeDate";
+import { useUserData } from "../hooks";
+import Label from "./Label";
+import IssueIcon from "./IssueIcon";
 
 export interface IssueItemProps {
   issue: Issue;
@@ -19,32 +22,42 @@ const IssueItem: React.FC<IssueItemProps> = ({ issue }) => {
     labels,
     comments,
   } = issue;
+
+  const assigneeUser = useUserData(assignee!);
+  const createdByUser = useUserData(createdBy!);
   return (
     <li>
-      <div>
-        {status === "done" || status === "cancelled" ? (
-          <GoIssueOpened style={{ color: "red" }} />
-        ) : (
-          <GoIssueClosed style={{ color: "green" }} />
-        )}
-      </div>
+      <IssueIcon
+        status={status}
+        withStyle={true}
+      />
       <div className="issue-content">
         <span>
           <Link to={`/issue/${number}`}>{title}</Link>
           {labels.map((label) => (
-            <span
+            <Label
               key={label}
-              className={`lablel red`}
-            >
-              {label}
-            </span>
+              label={label}
+            />
           ))}
         </span>
         <small>
-          # {number} opened {relativeDate(createdDate)} by {createdBy}
+          # {number} opened {relativeDate(createdDate)}
+          {createdByUser.isSuccess && `by ${createdByUser.data?.name}`}
         </small>
       </div>
-      {assignee && <div>{assignee}</div>}
+      {assignee && (
+        <img
+          src={
+            (assigneeUser?.isSuccess && assigneeUser.data?.profilePictureUrl) ||
+            ""
+          }
+          alt={`Assigned to ${
+            assigneeUser.isSuccess && assigneeUser.data?.name
+          }`}
+          className="assigned-to "
+        />
+      )}
       <span className="comment-count">
         {comments.length > 0 && (
           <>
