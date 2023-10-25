@@ -6,6 +6,8 @@ import { relativeDate } from "../helpers/relativeDate";
 import { useUserData } from "../hooks";
 import Label from "./Label";
 import IssueIcon from "./IssueIcon";
+import { useQueryClient } from "@tanstack/react-query";
+import { fetchWithErrors } from "../helpers";
 
 export interface IssueItemProps {
   issue: Issue;
@@ -23,10 +25,22 @@ const IssueItem: React.FC<IssueItemProps> = ({ issue }) => {
     comments,
   } = issue;
 
+  const queryClient = useQueryClient();
+
   const assigneeUser = useUserData(assignee!);
   const createdByUser = useUserData(createdBy!);
   return (
-    <li>
+    <li
+      onMouseEnter={() => {
+        queryClient.prefetchQuery(["issues", number.toString()], () =>
+          fetchWithErrors(`/api/issues/${number}`)
+        );
+        queryClient.prefetchQuery(
+          ["issues", number.toString(), "comments"],
+          () => fetchWithErrors(`/api/issues/${number}`)
+        );
+      }}
+    >
       <IssueIcon
         status={status}
         withStyle={true}
