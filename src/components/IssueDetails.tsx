@@ -4,6 +4,7 @@ import IssueHeader from "./IssueHeader";
 import Comment from "./Comment";
 import { useIssueComments, useIssueDetails } from "../hooks";
 import { IssueComment } from "../types";
+import IssueStatus from "./IssueStatus";
 
 export interface IssueDetailsProps {}
 
@@ -32,6 +33,12 @@ const IssueDetails: React.FC<IssueDetailsProps> = () => {
                 ))
               )}
             </section>
+            <aside>
+              <IssueStatus
+                status={issueDetailsQuery.data.status}
+                issueNumber={issueDetailsQuery.data.number.toString()}
+              />
+            </aside>
           </main>
         </>
       )}

@@ -3,17 +3,24 @@ import { statusOptions } from "../helpers";
 
 export interface StatusSelectedProps {
   value: string;
+  noEmptyOption: boolean;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const StatusSelected: React.FC<StatusSelectedProps> = ({ value, onChange }) => {
+const StatusSelected: React.FC<StatusSelectedProps> = ({
+  value,
+  onChange,
+  noEmptyOption = false,
+}) => {
   return (
     <select
       className="status-select"
       value={value}
       onChange={onChange}
     >
-      <option value="">Select a status to filter</option>
+      {noEmptyOption ? null : (
+        <option value="">Select a status to filter</option>
+      )}
       {statusOptions.map((status) => (
         <option
           key={status.id}
