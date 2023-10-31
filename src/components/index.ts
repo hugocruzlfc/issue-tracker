@@ -1,10 +1,13 @@
 export { default as AddIssueForm } from "./AddIssueForm";
 export { default as Comment } from "./Comment";
 export { default as FetchingIndicator } from "./FetchingIndicator";
+export { default as IssueAssignment } from "./IssueAssignment";
 export { default as IssueDetails } from "./IssueDetails";
 export { default as IssueHeader } from "./IssueHeader";
 export { default as IssueIcon } from "./IssueIcon";
 export { default as IssueItem } from "./IssueItem";
+export { default as IssueLabels } from "./IssueLabels";
+export { default as IssueStatus } from "./IssueStatus";
 export { default as IssuesList } from "./IssuesList";
 export { default as Label } from "./Label";
 export { default as LabelList } from "./LabelList";

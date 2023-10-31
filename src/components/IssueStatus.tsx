@@ -13,7 +13,7 @@ const IssueStatus: React.FC<IssueStatusProps> = ({ status, issueNumber }) => {
   const setStatus = useMutation(
     (status: string) =>
       fetch(`/api/issues/${issueNumber}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },

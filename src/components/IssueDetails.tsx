@@ -5,6 +5,8 @@ import Comment from "./Comment";
 import { useIssueComments, useIssueDetails } from "../hooks";
 import { IssueComment } from "../types";
 import IssueStatus from "./IssueStatus";
+import IssueAssignment from "./IssueAssignment";
+import IssueLabels from "./IssueLabels";
 
 export interface IssueDetailsProps {}
 
@@ -36,6 +38,14 @@ const IssueDetails: React.FC<IssueDetailsProps> = () => {
             <aside>
               <IssueStatus
                 status={issueDetailsQuery.data.status}
+                issueNumber={issueDetailsQuery.data.number.toString()}
+              />
+              <IssueAssignment
+                assignee={issueDetailsQuery.data.assignee}
+                issueNumber={issueDetailsQuery.data.number.toString()}
+              />
+              <IssueLabels
+                labels={issueDetailsQuery.data.labels}
                 issueNumber={issueDetailsQuery.data.number.toString()}
               />
             </aside>
