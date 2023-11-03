@@ -35,9 +35,13 @@ const IssueItem: React.FC<IssueItemProps> = ({ issue }) => {
         queryClient.prefetchQuery(["issues", number.toString()], () =>
           fetchWithErrors(`/api/issues/${number}`)
         );
-        queryClient.prefetchQuery(
+        // queryClient.prefetchQuery(
+        //   ["issues", number.toString(), "comments"],
+        //   () => fetchWithErrors(`/api/issues/${number}`)
+        // );
+        queryClient.prefetchInfiniteQuery(
           ["issues", number.toString(), "comments"],
-          () => fetchWithErrors(`/api/issues/${number}`)
+          () => fetchWithErrors(`/api/issues/${number}/comments?page=1`)
         );
       }}
     >

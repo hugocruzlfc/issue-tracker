@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export default function Issues() {
   const [labels, setLabels] = useState<string[]>([]);
   const [status, setStatus] = useState<string>("");
+  const [pageNum, setPageNum] = useState<number>(1);
 
   return (
     <div>
@@ -14,23 +15,29 @@ export default function Issues() {
           <IssuesList
             labels={labels}
             status={status}
+            pageNum={pageNum}
+            setPageNum={setPageNum}
           />
         </section>
         <aside>
           <LabelList
             selected={labels}
-            toggleLabel={(label: string) =>
+            toggleLabel={(label: string) => {
               setLabels((currentLabels) =>
                 currentLabels.includes(label)
                   ? currentLabels.filter((l) => l !== label)
                   : [...currentLabels, label]
-              )
-            }
+              );
+              setPageNum(1);
+            }}
           />
           <h3>Status</h3>
           <StatusSelected
             value={status}
-            onChange={(event) => setStatus(event.target.value)}
+            onChange={(event) => {
+              setStatus(event.target.value);
+              setPageNum(1);
+            }}
           />
           <hr />
           <Link

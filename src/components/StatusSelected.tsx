@@ -3,8 +3,8 @@ import { statusOptions } from "../helpers";
 
 export interface StatusSelectedProps {
   value: string;
-  noEmptyOption: boolean;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  noEmptyOption?: boolean;
 }
 
 const StatusSelected: React.FC<StatusSelectedProps> = ({

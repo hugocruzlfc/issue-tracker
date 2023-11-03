@@ -8,12 +8,19 @@ import Loader from "./Loader";
 export interface IssuesListProps {
   labels: string[];
   status: string;
+  pageNum: number;
+  setPageNum: (pageNum: number) => void;
 }
 
-const IssuesList: React.FC<IssuesListProps> = ({ labels, status }) => {
+const IssuesList: React.FC<IssuesListProps> = ({
+  labels,
+  status,
+  pageNum,
+  setPageNum,
+}) => {
   const [searchValue, setSearchValue] = useState("");
 
-  const issuesQuery = useIssues(labels, status);
+  const issuesQuery = useIssues(labels, status, pageNum);
 
   const searchQuery = useSearchQuery(searchValue);
 
@@ -36,6 +43,35 @@ const IssuesList: React.FC<IssuesListProps> = ({ labels, status }) => {
               />
             ))}
           </ul>
+          <div className="pagination">
+            <button
+              onClick={() => {
+                if (pageNum - 1 > 0) {
+                  setPageNum(pageNum - 1);
+                }
+              }}
+            >
+              Previous
+            </button>
+            <p>
+              Page {pageNum} {issuesQuery.isFetching ? "..." : ""}
+            </p>
+            <button
+              disabled={
+                issuesQuery.data?.length === 0 || issuesQuery.isPreviousData
+              }
+              onClick={() => {
+                if (
+                  issuesQuery.data?.length !== 0 &&
+                  !issuesQuery.isPreviousData
+                ) {
+                  setPageNum(pageNum + 1);
+                }
+              }}
+            >
+              Next
+            </button>
+          </div>
         </>
       ) : (
         <>
